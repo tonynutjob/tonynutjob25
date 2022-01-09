@@ -74,8 +74,8 @@ export const ItemProvider = ({children}) => {
         loadStorage();
     }, [STORAGE_KEY]);
     
-    const addItem = (title, content, callback) => {
-        dispatch({type: actionTypes.create, payload: { title, content }});
+    const addItem = (title, content, startPage, endPage, childComment, parentComment, callback) => {
+        dispatch({type: actionTypes.create, payload: { title, content, startPage, endPage, childComment, parentComment }});
         dispatch({type: actionTypes.save});
         if (callback) {
             callback();

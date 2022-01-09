@@ -7,6 +7,10 @@ const AddItemScreen = ({navigation, route}) => {
     const {create} = useContext(ItemContext);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [startPage, setStartPage] = useState('');
+    const [endPage, setEndPage] = useState('');
+    const [childComment, setChildComment] = useState('');
+    const [parentComment, setParentComment] = useState('');
 
     return (
         <View>
@@ -26,10 +30,48 @@ const AddItemScreen = ({navigation, route}) => {
                     setContent(text);
                 }}
             />
+
+            <Text style={styles.textLabel}>Pages read:</Text>
+            <View style={styles.itemContainer}>
+                <TextInput
+                    style={styles.intInput}
+                    placeholder='Start'
+                    onChangeText={(text) => {
+                        setStartPage(text);
+                    }}
+                />
+                <Text> to </Text>
+                <TextInput
+                    style={styles.intInput}
+                    placeholder='Finish'
+                    onChangeText={(text) => {
+                        setEndPage(text);
+                    }}
+                />
+            </View>
+
+            <Text style={styles.textLabel}>Child comments:</Text>
+            <TextInput 
+                style={styles.textInput}
+                placeholder='Type here'
+                onChangeText={(text) => {
+                    setChildComment(text);
+                }}
+            />
+
+            <Text style={styles.textLabel}>Parent comments:</Text>
+            <TextInput 
+                style={styles.textInput}
+                placeholder='Type here'
+                onChangeText={(text) => {
+                    setParentComment(text);
+                }}
+            />
+
             <Button 
                 title='Submit Item'
                 onPress={() => {
-                    create(title, content, () => navigation.pop());
+                    create(title, content, startPage, endPage, childComment, parentComment, () => navigation.pop());
                 }}
             />
         </View>
@@ -48,6 +90,19 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         marginTop: 10,
     },
+    intInput: {
+        fontSize: 18,
+        width: 48,
+        padding: 10,
+        margin: 5,
+        borderWidth: 1,
+        flex: 1
+    },
+    itemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+
 });
 
 export default AddItemScreen;

@@ -36,7 +36,7 @@ const EditItemScreen = ({navigation, route}) => {
                         title, 
                         content,
                         currentItem.date, 
-                        () => navigation.pop());
+                        () => navigation.popToTop());
                 }}
             />
         </View>
